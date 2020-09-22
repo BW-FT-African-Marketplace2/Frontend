@@ -14,12 +14,12 @@ function App() {
     <div>
       <Navbar />
       <Switch>
-        <PrivateRoute path='/dashboard' component={Dashboard}/>
+        <Route path='/dashboard' component={Dashboard}/>
         <Route path='/login' render={() => <Login />} />
         <Route path='/signup' render={() => <Signup />} />
       </Switch>
     </div>
-  ) 
+  )
 };
 
 export default App;
