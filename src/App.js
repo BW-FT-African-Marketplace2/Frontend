@@ -19,7 +19,7 @@ function App() {
         <Route path='/signup' render={() => <Signup />} />
       </Switch>
     </div>
-  ) 
+  )
 };
 
 export default App;
