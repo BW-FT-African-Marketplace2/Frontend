@@ -14,7 +14,7 @@ function App() {
     <div>
       <Navbar />
       <Switch>
-        <Route path='/dashboard' component={Dashboard}/>
+        <PrivateRoute path='/dashboard' component={Dashboard}/>
         <Route path='/login' render={() => <Login />} />
         <Route path='/signup' render={() => <Signup />} />
       </Switch>
