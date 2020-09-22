@@ -3,6 +3,7 @@ import { axiosWithAuth } from '../utils/axiosWithAuth'; // Will use this for axi
 import * as yup from 'yup';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import './Login.css';
 
 const defaultValues = {
     username: '',
@@ -72,7 +73,8 @@ const Login = (props) => {
       }, [formValues]);
 
     return (
-        <div>
+        <div className='login'>
+            <h2>Login</h2>
             <form onSubmit={submit}>
                 <label htmlFor="username">Username: </label>
                 <input type='text' name='username' value={formValues.username} onChange={handleChanges}/>
@@ -82,7 +84,7 @@ const Login = (props) => {
                 <input type='password' name='password' value={formValues.password} onChange={handleChanges} />
                 <p>{errors.password}</p>
 
-                <button disabled={buttonDisabled} >Login</button>
+                <button className='button' disabled={buttonDisabled} >Login</button>
             </form>
         </div>
     )
