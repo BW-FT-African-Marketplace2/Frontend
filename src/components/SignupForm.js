@@ -27,34 +27,34 @@ export default function SignupForm(props) {
   return (
     <form className='form container' onSubmit={onSubmit}>
       <div className='form-group submit'>
-        <h2>Add a User</h2>
-        <button disabled={disabled}>submit</button>
+        <h2>&nbsp;Join Us</h2>
+        
 
         <div className='errors'>
-          <div>{errors.name}</div>
+          <div>{errors.username}</div>
           <div>{errors.email}</div>
           <div>{errors.password}</div>
           <div>{errors.terms}</div>
         </div>
+        
       </div>
 
       <div className='form-group inputs'>
-        <h4>General information</h4>
+        <h4>&nbsp;Enter the required information</h4>
 
 
-        <label>Name
+        <label>&nbsp;Username:&nbsp;
           <input
-            value={values.name}
+            value={values.username}
             onChange={onChange}
-            name='name'
+            name='username'
             type='text'
-            placeholder='type your name'
+            placeholder='type a username'
           />
-        {errors.name.length > 0 ? <p>{errors.name}</p> : null}  
-     </label>
-
-        <label>Email
-
+        {errors.username.length > 0 ? <p>{errors.username}</p> : null}  
+        </label>
+        {/* <br></br> */}
+        <label>&nbsp;Email:&nbsp;
           <input
             type='email'
             name='email'
@@ -64,9 +64,8 @@ export default function SignupForm(props) {
           />
           {errors.email.length > 0 ? <p>{errors.email}</p> : null}
         </label>
-
-        <label>Password
-
+        <br></br>
+        <label>&nbsp;Password:&nbsp;
            <input
             type='password'
             name='password'
@@ -76,7 +75,8 @@ export default function SignupForm(props) {
           />
           {errors.password.length > 0 ? <p>{errors.password}</p> : null}
         </label>
-        <label>Terms
+        {/* <br></br> */}
+        <label>&nbsp;Terms
            <input
             type='checkbox'
             name='terms'
@@ -85,6 +85,7 @@ export default function SignupForm(props) {
           />
         </label>
       </div>
+      <button disabled={disabled}>submit</button>
     </form>
   )
 }
