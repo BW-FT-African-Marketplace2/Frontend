@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth'; // Will use this for axios so we won't have to keep retyping the URL
 import * as yup from 'yup';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+import './Login.css';
 
 const defaultValues = {
     username: '',
@@ -23,6 +26,7 @@ const Login = (props) => {
     const [savedFormInfo, setSavedFormInfo] = useState([]);
     const [errors, setErrors] = useState(defaultErrors);
     const [buttonDisabled, setButtonDisabled] = useState(true)
+    const history = useHistory();
 
     // Form functions
     const handleChanges = (evt) => {
@@ -32,15 +36,22 @@ const Login = (props) => {
     }
 
     const submit = (evt) => {
+        const token = localStorage.setItem('token', 'testtoken')
         evt.preventDefault();
         // Packages an easy-to-use payload to put onto state
         const newData = {
             username: formValues.username.trim(),
             password: formValues.password,
         }
+        // Axios functionality
+        axios.post('https://reqres.in/api/users', formValues)
+            .then((res) => {
+                console.log(res.data);
+            })
         // Adds new data to state & clears form
         setSavedFormInfo([...savedFormInfo, newData]);
         setFormValues(defaultValues);
+        history.push('/dashboard');
     }
 
     const validate = (name, value) => {
@@ -62,17 +73,18 @@ const Login = (props) => {
       }, [formValues]);
 
     return (
-        <div>
+        <div className='login'>
+            <h2>Login</h2>
             <form onSubmit={submit}>
-                <label for="username">Username: </label>
+                <label htmlFor="username">Username: </label>
                 <input type='text' name='username' value={formValues.username} onChange={handleChanges}/>
                 <p>{errors.username}</p>
 
-                <label for="password">Password: </label>
+                <label htmlFor="password">Password: </label>
                 <input type='password' name='password' value={formValues.password} onChange={handleChanges} />
                 <p>{errors.password}</p>
 
-                <button disabled={buttonDisabled} >Login</button>
+                <button className='button' disabled={buttonDisabled} >Login</button>
             </form>
         </div>
     )
