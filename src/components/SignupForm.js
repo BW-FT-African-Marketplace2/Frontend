@@ -53,7 +53,7 @@ export default function SignupForm(props) {
           />
         {errors.username.length > 0 ? <p>{errors.username}</p> : null}  
         </label>
-        <br></br>
+        {/* <br></br> */}
         <label>&nbsp;Email:&nbsp;
           <input
             type='email'
@@ -75,7 +75,7 @@ export default function SignupForm(props) {
           />
           {errors.password.length > 0 ? <p>{errors.password}</p> : null}
         </label>
-        <br></br>
+        {/* <br></br> */}
         <label>&nbsp;Terms
            <input
             type='checkbox'
