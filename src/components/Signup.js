@@ -6,14 +6,14 @@ import axios from 'axios'
 import * as yup from 'yup'
 
 const initialFormValues = {
-  name: '',
+  username: '',
   email: '',
   password: '',
   terms: false,
 }
 
 const initialFormErrors = {
-  name: '',
+  username: '',
   email: '',
   password: '',
   terms: '',
@@ -28,7 +28,7 @@ export default function Signup() {
   const [post, setPost] = useState([])
 
   const postNewUser = newUser => {
-    axios.post("https://reqres.in/api/users", newUser)
+    axios.post("https://african-market-2.herokuapp.com/createnewusers", newUser)
       .then(res => {
         setPost(res.data)
         setFormValues(initialFormValues)
@@ -68,7 +68,7 @@ export default function Signup() {
 
   const formSubmit = () => {
     const newUser = {
-      name: formValues.name.trim(),
+      name: formValues.username.trim(),
       email: formValues.email.trim(),
       password: formValues.password.trim(),
       terms: formValues.terms,
@@ -85,7 +85,7 @@ export default function Signup() {
 
   return (
     <div className='container'>
-      <header><h1>User Signup</h1></header>
+      <header><h1>&nbsp;User Signup</h1></header>
       <Form
         values={formValues}
         change={inputChange}
