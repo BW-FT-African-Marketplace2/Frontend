@@ -86,8 +86,8 @@ const Login = (props) => {
 
     return (
         <div className='login'>
-            <h2>List an item for sale!</h2>
-            <form onSubmit={submit}>
+            <h2 id='h2-id'>List an item for sale!</h2>
+            <form id='form-id' onSubmit={submit}>
                 <label htmlFor="title">Title: </label>
                 <input type='text' name='title' value={formValues.title} onChange={handleChanges}/>
                 <p>{errors.title}</p>
@@ -108,7 +108,7 @@ const Login = (props) => {
                 <input type='text' name='location' value={formValues.location} onChange={handleChanges} />
                 <p>{errors.location}</p>
 
-                <button className='button' disabled={buttonDisabled} >List Item</button>
+                <button id='button-id' disabled={buttonDisabled} >List Item</button>
             </form>
         </div>
     )

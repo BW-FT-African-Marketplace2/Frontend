@@ -74,8 +74,8 @@ const Login = (props) => {
 
     return (
         <div className='login'>
-            <h2>Login</h2>
-            <form onSubmit={submit}>
+            <h2 id='h2-id' >Login</h2>
+            <form onSubmit={submit} id='form-id' >
                 <label htmlFor="username">Username: </label>
                 <input type='text' name='username' value={formValues.username} onChange={handleChanges}/>
                 <p>{errors.username}</p>
@@ -84,7 +84,7 @@ const Login = (props) => {
                 <input type='password' name='password' value={formValues.password} onChange={handleChanges} />
                 <p>{errors.password}</p>
 
-                <button className='button' disabled={buttonDisabled} >Login</button>
+                <button id='button-id' disabled={buttonDisabled} >Login</button>
             </form>
         </div>
     )
