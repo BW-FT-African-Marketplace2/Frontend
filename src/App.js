@@ -9,6 +9,8 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import Dashboard from './components/Dashboard';
 import ListItem from './components/ListItem'
+import ItemsForSale from './components/ItemsForSale';
+
 
 function App() {
   return(
@@ -19,6 +21,7 @@ function App() {
         <Route path='/login' render={() => <Login />} />
         <Route path='/signup' render={() => <Signup />} />
         <Route path='/list-item' render={() => <ListItem />} />
+        <Route path='/forSale/:id' render={() => <ItemsForSale />} />
       </Switch>
     </div>
   )
