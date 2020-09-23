@@ -8,6 +8,7 @@ import Navbar from './components/Navbar';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Dashboard from './components/Dashboard';
+import ItemsForSale from './components/ItemsForSale';
 
 function App() {
   return(
@@ -17,6 +18,7 @@ function App() {
         <PrivateRoute path='/dashboard' component={Dashboard}/>
         <Route path='/login' render={() => <Login />} />
         <Route path='/signup' render={() => <Signup />} />
+        <Route path='/forSale/:id' render={() => <ItemsForSale />} />
       </Switch>
     </div>
   )
