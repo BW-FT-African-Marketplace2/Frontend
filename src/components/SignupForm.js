@@ -32,7 +32,7 @@ export default function SignupForm(props) {
 
         <div className='errors'>
           <div>{errors.username}</div>
-          <div>{errors.email}</div>
+          <div>{errors.primaryemail}</div>
           <div>{errors.password}</div>
           <div>{errors.terms}</div>
         </div>
@@ -57,12 +57,12 @@ export default function SignupForm(props) {
         <label>&nbsp;Email:&nbsp;
           <input
             type='email'
-            name='email'
+            name='primaryemail'
             onChange={onChange}
-            value={values.email}
+            value={values.primaryemail}
             placeholder='enter your e-mail'
           />
-          {errors.email.length > 0 ? <p>{errors.email}</p> : null}
+          {errors.primaryemail.length > 0 ? <p>{errors.primaryemail}</p> : null}
         </label>
         <br></br>
         <label>&nbsp;Password:&nbsp;

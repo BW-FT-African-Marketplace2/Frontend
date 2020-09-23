@@ -9,14 +9,14 @@ import './Signup.css'
 
 const initialFormValues = {
   username: '',
-  email: '',
+  primaryemail: '',
   password: '',
   terms: false,
 }
 
 const initialFormErrors = {
   username: '',
-  email: '',
+  primaryemail: '',
   password: '',
   terms: '',
 }
@@ -34,6 +34,7 @@ export default function Signup() {
       .then(res => {
         setPost(res.data)
         setFormValues(initialFormValues)
+        console.log(res.data)
         history.push("/login")
       })
       .catch(err => {
@@ -72,9 +73,8 @@ export default function Signup() {
   const formSubmit = () => {
     const newUser = {
       username: formValues.username.trim(),
-      email: formValues.email.trim(),
+      primaryemail: formValues.primaryemail.trim(),
       password: formValues.password.trim(),
-      terms: formValues.terms,
     }
     postNewUser(newUser)
   }
