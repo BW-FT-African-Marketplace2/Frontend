@@ -3,21 +3,30 @@ import { axiosWithAuth } from '../utils/axiosWithAuth'; // Will use this for axi
 import * as yup from 'yup';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import './Login.css';
+import './ListItem.css';
 
 const defaultValues = {
-    username: '',
-    password: '',
+    title: '',
+    image: '',
+    description: '',
+    price: undefined,
+    location: '',
 };
 
 const defaultErrors = {
-    username: '',
-    password: '',
+    title: '',
+    image: '',
+    description: '',
+    price: '',
+    location: '',
 };
 
 const schema = yup.object().shape({
-    username: yup.string().required('Username is required'),
-    password: yup.string().required('Password is required'),
+    title: yup.string().required('Title is required'),
+    image: yup.string().required('Image is required'),
+    description: yup.string().required('Description is required'),
+    price: yup.number().required('Price is required'),
+    location: yup.string().required('Location is required'),
 })
 
 const Login = (props) => {
@@ -40,8 +49,11 @@ const Login = (props) => {
         evt.preventDefault();
         // Packages an easy-to-use payload to put onto state
         const newData = {
-            username: formValues.username.trim(),
-            password: formValues.password,
+            title: formValues.title.trim(),
+            image: formValues.image,
+            description: formValues.description.trim(),
+            price: formValues.price,
+            location: formValues.trim(),
         }
         // Axios functionality
         axios.post('https://reqres.in/api/users', formValues)
@@ -74,17 +86,29 @@ const Login = (props) => {
 
     return (
         <div className='login'>
-            <h2>Login</h2>
+            <h2>List an item for sale!</h2>
             <form onSubmit={submit}>
-                <label htmlFor="username">Username: </label>
-                <input type='text' name='username' value={formValues.username} onChange={handleChanges}/>
-                <p>{errors.username}</p>
+                <label htmlFor="title">Title: </label>
+                <input type='text' name='title' value={formValues.title} onChange={handleChanges}/>
+                <p>{errors.title}</p>
 
-                <label htmlFor="password">Password: </label>
-                <input type='password' name='password' value={formValues.password} onChange={handleChanges} />
-                <p>{errors.password}</p>
+                <label htmlFor="image">Image: </label>
+                <input type='text' name='image' value={formValues.image} onChange={handleChanges} />
+                <p>{errors.image}</p>
 
-                <button className='button' disabled={buttonDisabled} >Login</button>
+                <label htmlFor="desription">Description: </label>
+                <textarea name="description" cols="30" rows="3" onChange={handleChanges}></textarea>
+                <p>{errors.description}</p>
+
+                <label htmlFor="price">Price: </label>
+                <input type='number' name='price' min="0" step="0.01" placeholder='Enter a valid price' value={formValues.price} onChange={handleChanges} />
+                <p>{errors.price}</p>
+
+                <label htmlFor="location">Location: </label>
+                <input type='text' name='location' value={formValues.location} onChange={handleChanges} />
+                <p>{errors.location}</p>
+
+                <button className='button' disabled={buttonDisabled} >List Item</button>
             </form>
         </div>
     )

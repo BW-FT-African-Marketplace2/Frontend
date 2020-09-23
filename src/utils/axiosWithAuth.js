@@ -6,6 +6,6 @@ export const axiosWithAuth = () => {
         Header: {
             Authorization: token
         },
-        baseURL: 'DONT://FORGETTOCHANGE.ME'
+        baseURL: 'https://reqres.in'
     })
 };
