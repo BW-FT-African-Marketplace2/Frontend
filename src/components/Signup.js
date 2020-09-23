@@ -88,7 +88,7 @@ export default function Signup() {
 
   return (
     <div className='container'>
-      <header><h1>&nbsp;User Signup</h1></header>
+      <header><h1>User Signup</h1></header>
       <Form
         values={formValues}
         change={inputChange}

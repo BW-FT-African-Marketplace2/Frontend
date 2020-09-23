@@ -27,7 +27,6 @@ export default function SignupForm(props) {
   return (
     <form className='form container' onSubmit={onSubmit}>
       <div className='form-group submit'>
-        <h2>&nbsp;Join Us</h2>
         
 
         <div className='errors'>
@@ -43,7 +42,7 @@ export default function SignupForm(props) {
         <h4>&nbsp;Enter the required information</h4>
 
 
-        <label>&nbsp;Username:&nbsp;
+        <label>Username:&nbsp;
           <input
             value={values.username}
             onChange={onChange}
@@ -53,8 +52,8 @@ export default function SignupForm(props) {
           />
         {errors.username.length > 0 ? <p>{errors.username}</p> : null}  
         </label>
-        {/* <br></br> */}
-        <label>&nbsp;Email:&nbsp;
+        <br></br>
+        <label>Email:&nbsp;
           <input
             type='email'
             name='primaryemail'
@@ -65,7 +64,7 @@ export default function SignupForm(props) {
           {errors.primaryemail.length > 0 ? <p>{errors.primaryemail}</p> : null}
         </label>
         <br></br>
-        <label>&nbsp;Password:&nbsp;
+        <label>Password:&nbsp;
            <input
             type='password'
             name='password'
@@ -75,8 +74,8 @@ export default function SignupForm(props) {
           />
           {errors.password.length > 0 ? <p>{errors.password}</p> : null}
         </label>
-        {/* <br></br> */}
-        <label>&nbsp;Terms
+        <br></br>
+        <label>Terms
            <input
             type='checkbox'
             name='terms'
