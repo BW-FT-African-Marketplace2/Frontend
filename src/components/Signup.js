@@ -4,17 +4,19 @@ import React, { useState, useEffect } from 'react'
 import schema from './SignupFormSchema'
 import axios from 'axios'
 import * as yup from 'yup'
+import { useHistory } from 'react-router-dom';
+import './Signup.css'
 
 const initialFormValues = {
   username: '',
-  email: '',
+  primaryemail: '',
   password: '',
   terms: false,
 }
 
 const initialFormErrors = {
   username: '',
-  email: '',
+  primaryemail: '',
   password: '',
   terms: '',
 }
@@ -26,12 +28,14 @@ export default function Signup() {
   const [formErrors, setFormErrors] = useState(initialFormErrors)
   const [disabled, setDisabled] = useState(initialDisabled)
   const [post, setPost] = useState([])
-
+  const history = useHistory();
   const postNewUser = newUser => {
-    axios.post("https://african-market-2.herokuapp.com/createnewusers", newUser)
+    axios.post("https://african-market-2.herokuapp.com/createnewuser", newUser)
       .then(res => {
         setPost(res.data)
         setFormValues(initialFormValues)
+        console.log(res.data)
+        history.push("/login")
       })
       .catch(err => {
         console.log(err)
@@ -68,10 +72,9 @@ export default function Signup() {
 
   const formSubmit = () => {
     const newUser = {
-      name: formValues.username.trim(),
-      email: formValues.email.trim(),
+      username: formValues.username.trim(),
+      primaryemail: formValues.primaryemail.trim(),
       password: formValues.password.trim(),
-      terms: formValues.terms,
     }
     postNewUser(newUser)
   }
@@ -85,7 +88,7 @@ export default function Signup() {
 
   return (
     <div className='container'>
-      <header><h1>&nbsp;User Signup</h1></header>
+      <header><h1>User Signup</h1></header>
       <Form
         values={formValues}
         change={inputChange}

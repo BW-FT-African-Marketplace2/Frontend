@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 10%;
+    margin-top: 7%;
 }
 
 #form-id {
@@ -16,7 +16,6 @@
     border-radius: 9px;
     font-size: 1rem;
     font-weight: bold;
-    color: royalblue;
 }
 
 #h2-id {
