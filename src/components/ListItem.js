@@ -3,7 +3,24 @@ import { axiosWithAuth } from '../utils/axiosWithAuth'; // Will use this for axi
 import * as yup from 'yup';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import './ListItem.css';
+
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import Paper from '@material-ui/core/Paper';
+import Input from '@material-ui/core/Input';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import InputLabel from '@material-ui/core/InputLabel';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+
+
+
+
 
 const defaultValues = {
     title: '',
@@ -21,6 +38,27 @@ const defaultErrors = {
     location: '',
 };
 
+const useStyles = makeStyles((theme) => ({
+    paper: {
+      marginTop: theme.spacing(15),
+      padding: theme.spacing(2),
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    avatar: {
+      margin: theme.spacing(1),
+      backgroundColor: '#f94144',
+    },
+    form: {
+      width: '100%', // Fix IE 11 issue.
+      marginTop: theme.spacing(1),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+  }));
+
 const schema = yup.object().shape({
     title: yup.string().required('Title is required'),
     image: yup.string().required('Image is required'),
@@ -36,6 +74,7 @@ const Login = (props) => {
     const [errors, setErrors] = useState(defaultErrors);
     const [buttonDisabled, setButtonDisabled] = useState(true)
     const history = useHistory();
+    const classes = useStyles();
 
     // Form functions
     const handleChanges = (evt) => {
@@ -86,30 +125,27 @@ const Login = (props) => {
 
     return (
         <div className='login'>
-            <h2 id='h2-id'>List an item for sale!</h2>
-            <form id='form-id' onSubmit={submit}>
-                <label htmlFor="title">Title: </label>
-                <input type='text' name='title' value={formValues.title} onChange={handleChanges}/>
-                <p>{errors.title}</p>
 
-                <label htmlFor="image">Image: </label>
-                <input type='text' name='image' value={formValues.image} onChange={handleChanges} />
-                <p>{errors.image}</p>
-
-                <label htmlFor="desription">Description: </label>
-                <textarea name="description" cols="30" rows="3" onChange={handleChanges}></textarea>
-                <p>{errors.description}</p>
-
-                <label htmlFor="price">Price: </label>
-                <input type='number' name='price' min="0" step="0.01" placeholder='Enter a valid price' value={formValues.price} onChange={handleChanges} />
-                <p>{errors.price}</p>
-
-                <label htmlFor="location">Location: </label>
-                <input type='text' name='location' value={formValues.location} onChange={handleChanges} />
-                <p>{errors.location}</p>
-
-                <button id='button-id' disabled={buttonDisabled} >List Item</button>
-            </form>
+            <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <Paper className={classes.paper}>
+                    <Typography component="h1" variant="h5"> List an item for sale! </Typography>
+                    <form className={classes.form} onSubmit={submit}>
+                        <TextField value={formValues.title} onChange={handleChanges} variant="outlined" margin="normal" required fullWidth label="Title" name="title" autoComplete="email" autoFocus />
+                        <p>{errors.title}</p>
+                        <TextField value={formValues.image} onChange={handleChanges} variant="outlined" margin="normal" required fullWidth name="image" label="Image" type="text" />
+                        <p>{errors.image}</p>
+                        <TextField value={formValues.description} onChange={handleChanges} variant="outlined" margin="normal" required fullWidth label="Description" name="description" autoComplete="email" autoFocus />
+                        <p>{errors.description}</p>
+                        <TextField value={formValues.location} onChange={handleChanges} variant="outlined" margin="normal" required fullWidth label="Location" name="location" autoComplete="email" autoFocus />
+                        <p>{errors.location}</p>
+                        <InputLabel htmlFor="outlined-adornment-amount">&nbsp; &nbsp; Price</InputLabel>
+                        <OutlinedInput id="outlined-adornment-amount" value={formValues.amount} onChange={handleChanges} startAdornment={<InputAdornment position="start">$</InputAdornment>} labelWidth={60} placeholder='Enter a valid price' />                        
+                        <p>{errors.price}</p>
+                        <Button disabled={buttonDisabled} type="submit" fullWidth variant="contained" color="primary" className={classes.submit} > Submit </Button>
+                    </form>
+                </Paper>
+            </Container>
         </div>
     )
 };
