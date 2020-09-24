@@ -3,7 +3,20 @@ import { axiosWithAuth } from '../utils/axiosWithAuth'; // Will use this for axi
 import * as yup from 'yup';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import './Login.css';
+
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import Paper from '@material-ui/core/Paper';
+
 
 const defaultValues = {
     username: '',
@@ -20,6 +33,40 @@ const schema = yup.object().shape({
     password: yup.string().required('Password is required'),
 })
 
+function Copyright() {
+    return (
+      <Typography variant="body2" color="textSecondary" align="center">
+        {'Copyright © '}
+        <Link color="inherit" href="https://github.com/BW-FT-African-Marketplace2">
+        bw_ft_african_2
+        </Link>{' '}
+        {new Date().getFullYear()}
+        {'.'}
+      </Typography>
+    );
+  }
+  
+  const useStyles = makeStyles((theme) => ({
+    paper: {
+      marginTop: theme.spacing(15),
+      padding: theme.spacing(2),
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    avatar: {
+      margin: theme.spacing(1),
+      backgroundColor: '#f94144',
+    },
+    form: {
+      width: '100%', // Fix IE 11 issue.
+      marginTop: theme.spacing(1),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+  }));
+
 const Login = (props) => {
     // State
     const [formValues, setFormValues] = useState(defaultValues);
@@ -27,6 +74,7 @@ const Login = (props) => {
     const [errors, setErrors] = useState(defaultErrors);
     const [buttonDisabled, setButtonDisabled] = useState(true)
     const history = useHistory();
+    const classes = useStyles();
 
     // Form functions
     const handleChanges = (evt) => {
@@ -44,9 +92,12 @@ const Login = (props) => {
             password: formValues.password,
         }
         // Axios functionality
-        axios.post('https://reqres.in/api/users', formValues)
+        axios.post('https://african-market-2.herokuapp.com/login', formValues)
             .then((res) => {
                 console.log(res.data);
+            })
+            .catch(err => {
+                console.log(err);
             })
         // Adds new data to state & clears form
         setSavedFormInfo([...savedFormInfo, newData]);
@@ -74,18 +125,30 @@ const Login = (props) => {
 
     return (
         <div className='login'>
-            <h2 id='h2-id' >Login</h2>
-            <form onSubmit={submit} id='form-id' >
-                <label htmlFor="username">Username: </label>
-                <input type='text' name='username' value={formValues.username} onChange={handleChanges}/>
-                <p>{errors.username}</p>
-
-                <label htmlFor="password">Password: </label>
-                <input type='password' name='password' value={formValues.password} onChange={handleChanges} />
-                <p>{errors.password}</p>
-
-                <button id='button-id' disabled={buttonDisabled} >Login</button>
-            </form>
+            <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <Paper className={classes.paper}>
+                    <Avatar className={classes.avatar}>
+                    <LockOutlinedIcon />
+                    </Avatar>
+                    <Typography component="h1" variant="h5"> Log in </Typography>
+                    <form className={classes.form} onSubmit={submit}>
+                        <TextField value={formValues.username} onChange={handleChanges} variant="outlined" margin="normal" required fullWidth id="email" label="Username" name="username" autoComplete="email" autoFocus />
+                        <p>{errors.username}</p>
+                        <TextField value={formValues.password} onChange={handleChanges} variant="outlined" margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" />
+                        <p>{errors.password}</p>
+                        <Button disabled={buttonDisabled} type="submit" fullWidth variant="contained" color="primary" className={classes.submit} > Log In </Button>
+                        <Grid container>
+                            <Grid item>
+                            <Link href="signup" variant="body2"> {"Don't have an account? Sign Up"} </Link>
+                            </Grid>
+                        </Grid>
+                    </form>
+                </Paper>
+                <Box mt={8}>
+                    <Copyright />
+                </Box>
+            </Container>
         </div>
     )
 };
