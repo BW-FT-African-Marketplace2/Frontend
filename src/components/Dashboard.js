@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
-import { fetchForSale } from '../store/actions/fetchForSaleAction'
+import { fetchUserData, fetchForSale } from '../store/actions'
 
 import Item from './Item';
 
 const Dashboard = props => {
-    const { forSale, isLoading, fetchForSale } = props;
+    const { users, usersIsLoading, fetchUserData, fetchForSale, forSale } = props;
     useEffect(() => {
+      fetchUserData();
       fetchForSale();
-    }, [fetchForSale]);
+    }, []);
     return(
         <div>
             {
@@ -27,10 +28,13 @@ const Dashboard = props => {
 
 const mapStateToProps = state => {
   return {
-    isLoading: state.isLoading,
-    forSale: state.forSale,
-    error: state.error
+    usersIsLoading: state.fetchUserData.isLoading,
+    userError: state.fetchUserData.error,
+    users: state.fetchUserData.users,
+    forSaleIsLoading: state.fetchForSale.isLoading,
+    forSaleError: state.fetchForSale.error,
+    forSale: state.fetchForSale.forSale
   }
 }
 
-export default connect(mapStateToProps, { fetchForSale })(Dashboard);
+export default connect(mapStateToProps, { fetchUserData, fetchForSale })(Dashboard);
