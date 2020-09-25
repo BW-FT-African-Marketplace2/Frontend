@@ -11,7 +11,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import { fetchForSale as reducer } from './store/reducers'
+import reducer from './store/reducers'
 
 const store = createStore(reducer, applyMiddleware(thunk, logger));
 

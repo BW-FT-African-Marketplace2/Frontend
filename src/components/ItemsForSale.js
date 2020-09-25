@@ -1,27 +1,43 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { axiosWithAuth } from '../utils/axiosWithAuth';
+import { useParams, useLocation } from 'react-router-dom';
+import { connect } from 'react-redux';
+import axios from 'axios';
 
 import Item from './Item';
 
 const ItemsForSale = props => {
+    const { saved } = props
     const [item, setItem] = useState('');
     const params = useParams();
+    const location = useLocation();
+
     useEffect(() => {
-        axiosWithAuth()
-        .get(`/api/users/${params.id}`)
+        axios
+        .get(`https://fakestoreapi.com/products/${params.id}`)
         .then(res => {
-            console.log(res.data.data);
-            setItem(res.data.data);
+            console.log(res.data);
+            setItem(res.data);
         })
         .catch(err => console.log(err));
-    }, [setItem])
+    }, [params.id])
 
     return (
         <div>
-            <Item item={item}/>
+            {
+                location.pathname === `/forSale/${params.id}` ? <Item item={item} /> : saved.map(itemData => {
+                    return(
+                        <Item key={itemData.id} item={itemData} />
+                    )
+                })
+            }
         </div>
     )
 }
 
-export default ItemsForSale;
+const mapStateToProps = state => {
+    return {
+        saved: state.savedList.saved
+    }
+}
+
+export default connect(mapStateToProps, {})(ItemsForSale);
