@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import { red } from '@material-ui/core/colors';
 import Card from '@material-ui/core/Card'
@@ -9,6 +10,9 @@ import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import CardActions from '@material-ui/core/CardActions';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -33,13 +37,22 @@ const useStyles = makeStyles((theme) => ({
     avatar: {
       backgroundColor: red[500],
     },
+    textArea: {
+      marginTop: '10px',
+      marginBottom: '10px'
+    }
   }));
 
 const Item = props => {
-    const { item } = props;
+    const { item, setSaved, saved } = props;
     const classes = useStyles();
+
+    const save = () => {
+      setSaved([item, ...saved])
+    };
+
     return(
-        <div className={classes.container}>
+
             <Card className={classes.root}>
                 <CardHeader
                     avatar={
@@ -61,13 +74,22 @@ const Item = props => {
                     title="Paella dish"
                 />
                 <CardContent>
-                    <Typography variant="body2" color="textSecondary" component="p">
+                  <Link to={`/forSale/${item.id}`}>
+                    <Typography variant="body2" color="textSecondary" component="p" className={classes.textArea}>
                         This impressive paella is a perfect party dish and a fun meal to cook together with your
                         guests. Add 1 cup of frozen peas along with the mussels, if you like.
                     </Typography>
+                  </Link>
                 </CardContent>
+                <CardActions>
+                  <IconButton aria-label='Save to list'>
+                    <FavoriteIcon />
+                  </IconButton>
+                  <Button variant="outlined" color="primary" onClick={save}>
+                    Save to List
+                  </Button>
+                </CardActions>
             </Card>
-        </div>
     )
 };
 

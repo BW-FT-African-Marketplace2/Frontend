@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Switch, Route } from 'react-router-dom'
 
 import './App.css';
@@ -10,18 +10,21 @@ import Signup from './components/Signup';
 import Dashboard from './components/Dashboard';
 import ListItem from './components/ListItem'
 import ItemsForSale from './components/ItemsForSale';
+import SavedList from './components/SavedList';
 
 
-function App() {
+function App(props) {
+  const [saved, setSaved] = useState([]);
   return(
     <div>
-      <Navbar />
+      <Navbar saved={saved}/>
       <Switch>
-        <Route path='/dashboard' component={Dashboard}/>
+        <Route path='/dashboard' component={() => <Dashboard setSaved={setSaved} saved={saved}/>}/>
         <Route path='/login' render={() => <Login />} />
         <Route path='/signup' render={() => <Signup />} />
         <Route path='/list-item' render={() => <ListItem />} />
         <Route path='/forSale/:id' render={() => <ItemsForSale />} />
+        <Route path='/saved' render={() => <SavedList />} />
       </Switch>
     </div>
   )

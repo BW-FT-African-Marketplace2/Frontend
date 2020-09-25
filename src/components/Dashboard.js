@@ -16,7 +16,7 @@ const useStyles = makeStyles({
 })
 
 const Dashboard = props => {
-    const { users, usersIsLoading, fetchUserData, fetchForSale, forSale } = props;
+    const { setSaved, saved, fetchUserData, fetchForSale, forSale } = props;
     const classes = useStyles();
     useEffect(() => {
       fetchUserData();
@@ -27,9 +27,7 @@ const Dashboard = props => {
             {
               forSale.map(item => {
                 return (
-                  <Link key={item.id} to={`/forSale/${item.id}`}>
-                    <Item item={item}/> 
-                  </Link>
+                  <Item item={item} saved={saved} setSaved={setSaved} /> 
                 )
               })
             }
