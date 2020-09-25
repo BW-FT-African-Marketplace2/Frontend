@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { fetchUserData, fetchForSale } from '../store/actions'
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -16,18 +16,25 @@ const useStyles = makeStyles({
 })
 
 const Dashboard = props => {
-    const { setSaved, saved, fetchUserData, fetchForSale, forSale } = props;
+    const { fetchUserData, fetchForSale, forSale } = props;
     const classes = useStyles();
+    const location = useLocation();
+
     useEffect(() => {
-      fetchUserData();
       fetchForSale();
-    }, []);
+    }, [fetchForSale]);
+
     return(
         <div className={classes.root}>
+          <div>
+          <h2>Items for Sale</h2>
+          <Link to='/list-item'>Sell Item</Link>
+          </div>
+          
             {
               forSale.map(item => {
                 return (
-                  <Item item={item} saved={saved} setSaved={setSaved} /> 
+                  <Item key={item.id} item={item} /> 
                 )
               })
             }
@@ -42,7 +49,7 @@ const mapStateToProps = state => {
     users: state.fetchUserData.users,
     forSaleIsLoading: state.fetchForSale.isLoading,
     forSaleError: state.fetchForSale.error,
-    forSale: state.fetchForSale.forSale
+    forSale: state.fetchForSale.forSale,
   }
 }
 

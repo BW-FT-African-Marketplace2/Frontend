@@ -1,4 +1,5 @@
-import { ADD_TO_SAVED_ERROR, ADD_TO_SAVED_SUCCESS } from '../actions'
+import { ADD_TO_SAVED_ERROR, ADD_TO_SAVED_SUCCESS, DEL_SAVED_SUCCESS, DEL_SAVED_ERROR } from '../actions'
+import { LOCATION_CHANGE } from 'react-router-redux'
 
 const initState = {
     saved: [],
@@ -7,6 +8,9 @@ const initState = {
 
 export const savedList = (state = initState, action) => {
     switch(action.type) {
+        case LOCATION_CHANGE: 
+            return state;
+
         case ADD_TO_SAVED_SUCCESS:
             return {
                 error: '',
@@ -18,6 +22,18 @@ export const savedList = (state = initState, action) => {
                 saved: state.saved,
                 error: action.payload
             };
+
+        case DEL_SAVED_SUCCESS:
+            return {
+                saved: action.payload,
+                error:''
+            }
+
+        case DEL_SAVED_ERROR:
+            return {
+                error: action.payload,
+                saved: state.saved
+            }
 
         default:
             return state;

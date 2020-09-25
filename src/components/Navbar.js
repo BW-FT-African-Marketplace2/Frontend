@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link as RLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import AppBar from '@material-ui/core/AppBar';
@@ -45,20 +45,28 @@ const Navbar = props => {
                 <Toolbar className={classes.toolbar}>
                     <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}> African Marketplace </Typography>
                     <nav>
-                        <Link variant="button" color="textPrimary" href="/login" className={classes.link}>
+                        <RLink to="/login">
+                        <Link variant="button" color="textPrimary" className={classes.link}>
                             LOGIN
                         </Link>
-                        <Link variant="button" color="textPrimary" href="/signup" className={classes.link}>
+                        </RLink>
+                        <RLink to="/signup">
+                        <Link variant="button" color="textPrimary" className={classes.link}>
                             SIGN UP
                         </Link>
-                        <Link variant="button" color="textPrimary" href="/dashboard" className={classes.link}>
+                        </RLink>
+                        <RLink to="/dashboard">
+                        <Link variant="button" color="textPrimary" className={classes.link}>
                             DASHBOARD
                         </Link>
-                          <Link variant="button" color="textPrimary" href="/saved" className={classes.link}>
+                        </RLink>
+                          <RLink to="/saved">
+                          <Link variant="button" color="textPrimary" className={classes.link}>
                             {
                               location.pathname !== '/' && location.pathname !== '/login' && location.pathname !== '/signup' ? `SAVED( ${saved.length} )` : ''
                             }
                           </Link>
+                          </RLink>
                     </nav>
                 </Toolbar>
             </AppBar>
@@ -66,4 +74,10 @@ const Navbar = props => {
     )
 }
 
-export default Navbar;
+const mapStateToProps = state => {
+  return {
+    saved: state.savedList.saved
+  }
+}
+
+export default connect(mapStateToProps, {})(Navbar);
