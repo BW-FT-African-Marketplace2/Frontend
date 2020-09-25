@@ -17,7 +17,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 
-
 const defaultValues = {
     username: '',
     password: '',
@@ -59,7 +58,7 @@ function Copyright() {
       backgroundColor: '#f94144',
     },
     form: {
-      width: '100%', // Fix IE 11 issue.
+      width: '100%',
       marginTop: theme.spacing(1),
     },
     submit: {
@@ -125,6 +124,7 @@ const Login = (props) => {
 
     return (
         <div className='login'>
+
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <Paper className={classes.paper}>

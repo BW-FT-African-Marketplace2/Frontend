@@ -18,10 +18,6 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 
-
-
-
-
 const defaultValues = {
     title: '',
     image: '',
@@ -45,13 +41,14 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
+      width: '100%',
     },
     avatar: {
       margin: theme.spacing(1),
       backgroundColor: '#f94144',
     },
     form: {
-      width: '100%', // Fix IE 11 issue.
+      width: '100%', 
       marginTop: theme.spacing(1),
     },
     submit: {
@@ -92,7 +89,7 @@ const Login = (props) => {
             image: formValues.image,
             description: formValues.description.trim(),
             price: formValues.price,
-            location: formValues.trim(),
+            location: formValues.location.trim(),
         }
         // Axios functionality
         axios.post('https://reqres.in/api/users', formValues)
@@ -124,7 +121,7 @@ const Login = (props) => {
       }, [formValues]);
 
     return (
-        <div className='login'>
+        <div className={classes.login}>
 
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
@@ -140,9 +137,9 @@ const Login = (props) => {
                         <TextField value={formValues.location} onChange={handleChanges} variant="outlined" margin="normal" required fullWidth label="Location" name="location" autoComplete="email" autoFocus />
                         <p>{errors.location}</p>
                         <InputLabel htmlFor="outlined-adornment-amount">&nbsp; &nbsp; Price</InputLabel>
-                        <OutlinedInput id="outlined-adornment-amount" value={formValues.amount} onChange={handleChanges} startAdornment={<InputAdornment position="start">$</InputAdornment>} labelWidth={60} placeholder='Enter a valid price' />                        
+                        <OutlinedInput id="outlined-adornment-amount" value={formValues.price} onChange={handleChanges} name='price' startAdornment={<InputAdornment position="start">$</InputAdornment>} labelWidth={60} placeholder='Enter a valid price' />                        
                         <p>{errors.price}</p>
-                        <Button disabled={buttonDisabled} type="submit" fullWidth variant="contained" color="primary" className={classes.submit} > Submit </Button>
+                        <Button disabled={buttonDisabled} type="submit" fullWidth variant="contained" color="primary" className={classes.submit} > List Item </Button>
                     </form>
                 </Paper>
             </Container>
