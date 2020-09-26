@@ -74,7 +74,9 @@ const useStyles = makeStyles((theme) => ({
     const params = useParams();
     
     useEffect(() => {
-      setFormValues(forSale.find(obj => obj.id === parseInt(params.id)))
+      if(params.id) {
+        setFormValues(forSale.find(obj => obj.id === parseInt(params.id)))
+      }
     }, [updateProduct])
     
     // Form functions
